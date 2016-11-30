@@ -1,0 +1,65 @@
+
+/************************/
+#img .options{
+	padding:5px;
+	background: #eee;
+	box-shadow: 0 0 5px #ccc;
+}
+#img .options button{
+	margin:0 5px;
+	border-radius:5px;
+	border:none;
+	background: #0055ff;
+	color:#fff;
+	padding:8px;
+	cursor:pointer;
+}
+#img .img_list{
+	padding:5px;
+	width:140px;
+	display:inline-block;
+	*display:inline;
+	zoom:1;
+	height:164px;
+	margin:10px;
+	text-align: center;
+}
+#img .img_list:hover{
+	box-shadow:0 0 5px #09f;
+}
+#img .img_list div{
+	height:140px;
+	text-align: center;
+	line-height: 140px;
+	border:1px solid #f5f5f5;
+}
+#img .img_list div img{
+	max-height:140px;
+	max-width:140px;
+}
+#img .img_list span{
+	padding:5px;
+	font-size:10px;
+}
+#img .img_list_con{
+	display: inline-block;
+	position: relative;
+}
+#img .img_list_con .removeImg{
+	display:none;
+	position: absolute;
+	width:16px;
+	height:16px;
+	line-height: 14px;
+	text-align: center;
+	top:10px;
+	right:10px;
+	text-decoration: none;
+	border-radius:50%;
+	background:#666;
+	color:#fff;
+	box-shadow: 0 0 5px #fff;
+}
+#img .img_list_con:hover .removeImg{
+	display: block;
+}

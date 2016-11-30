@@ -1,0 +1,88 @@
+
+<% if(data){%>
+<% var d =  data[1]%>
+<% for(var i in d){%>
+<% if(d[i].layoutId==layoutId&&d[i].layoutName=='slider'){ %>
+<link rel="stylesheet" href="/stylesheets/quake.slider.css">
+<script src="/javascripts/quake.slider-min.js"></script>
+ <div class="quake-slider" layoutId="<%= layoutId%>">
+    <div class="quake-slider-images">
+        <% for(var k in d[i].data){ %>
+          <% for(var x in d[i].data[k]){ %>
+            <a target="_blank" href="<%= d[i].data[k][x].imgLink%>">
+                <img src="<%= d[i].data[k][x].imgAddr%>" alt="<%= d[i].data[k][x].imgText%>" />
+            </a>
+          <% } %>
+        <% } %>
+    </div>
+    <div class="quake-slider-captions quake-slider-caption-container">
+    <% for(var k in d[i].data){ %>
+      <% for(var x in d[i].data[k]){ %>
+        <div class="quake-slider-caption">
+           <%= d[i].data[k][x].imgText %>
+        </div>
+      <% } %>
+    <% } %>
+    </div>
+    <div class="quake-nav-wrapper">
+    </div>
+</div>
+
+<script>
+
+$('.quake-slider').quake({ 
+    thumbnails: true,
+    captionOpacity: '0.3',
+    thumbnailsPath: 'images',
+    frameWidth: 1200,
+    frameHeight:400,
+    animationSpeed: 500,
+    pauseTime: 5e3,
+    rows: 4,
+    cols: 12,
+    effects: ["randomFade", "linearPeal", "linearPealReverse", "swirlFadeIn", "swirlFadeOut", "diagonalFade", "blind", "barsUp", "barsDown", "blindFade", "explode", "explodeFancy", "mixBars", "mixBarsFancy", "fade", "blindFadeReverse", "slideIn", "slideInFancy", "slideLeft", "slideRight", "slideUp", "slideDown", "fallingBlindFade", "raisingBlindFade"],
+    effects: ['fade','swirlFadeIn', 'swirlFadeOut', 'swirlFadeIn', 'linearPealReverse', 'slideIn', 'swirlFadeIn', 'explodeFancy'],
+    nextText: "Next",
+    prevText: "Prev",
+    hasNextPrev: true,
+    captionOrientations: ["right"],
+    captionAnimationSpeed: 1e3,
+    captionsSetup: [
+                     {
+                         "orientation": "bottom",
+                         "slides": [0, 4],
+                         "callback": captionAnimateCallback
+                     },
+                      {
+                          "orientation": "top",
+                          "slides": [1, 5],
+                          "callback": captionAnimateCallback
+                      }
+                      ,
+                      {
+                          "orientation": "left",
+                          "slides": [2, 6],
+                          "callback": captionAnimationCallback1
+                      }
+                      ,
+                      {
+                          "orientation": "right",
+                          "slides": [3, 7],
+                          "callback": captionAnimationCallback1
+                      }
+                    ]
+
+});
+
+function captionAnimateCallback(captionWrapper, captionContainer, orientation) {
+    captionWrapper.css({ left: '-990px' }).stop(true, true).animate({ left: 0 }, 500);
+    captionContainer.css({ left: '-990px' }).stop(true, true).animate({ left: 0 }, 500);
+}
+function captionAnimationCallback1(captionWrapper, captionContainer, orientation) {
+    captionWrapper.css({ top: '-330px' }).stop(true, true).animate({ top: 0 }, 500);
+    captionContainer.css({ top: '-330px' }).stop(true, true).animate({ top: 0 }, 500);
+}
+</script>
+<% }%>
+<% }%>
+<% }%>

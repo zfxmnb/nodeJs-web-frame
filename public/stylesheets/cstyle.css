@@ -1,0 +1,445 @@
+*{
+	padding:0px;
+	margin:0px;
+	font-family:"MicroSoft YaHei";
+}
+.page_header{
+	height:50px;
+	padding-left:20px;
+	background:#666;
+	box-shadow: 0 0 10px #666;
+	color:#fff;
+}
+/*********滚动条*************/
+.zUIpanelScrollBox,.zUIpanelScrollBar{
+	width:10px;
+	top:4px;
+	right:2px;
+	border-radius:5px;
+	
+}
+.zUIpanelScrollBox{
+	background:black;opacity:0.1;
+	filter:alpha(opacity=10);
+}
+.zUIpanelScrollBar{
+	background:#fff;opacity:0.8;
+	filter:alpha(opacity=80);
+}
+/****** nav start********/
+
+.page_body_nav{
+	width:150px;
+	height:100%;
+	float:left;
+	border-right:2px solid #cecece;
+	box-shadow:0 0 20px #ddd inset;
+}
+.page_body_nav ul{
+	margin-top:45px;
+	border-top:2px solid #cecece;
+}
+.page_body_nav ul li{
+	padding:10px;
+	width:130px;
+	border-bottom:2px solid #cecece;
+	cursor:pointer;
+	background:#fff;
+}
+.page_body_nav ul li.curr{
+	border-right:2px solid #fff;
+}
+/****** nav end********/
+/****** con start********/
+.page_body_con{
+	margin-left:152px;
+	height:100%;
+	overflow:hidden; 
+	position: relative;
+}
+.page_body_con ul.tab_content{
+	height:100%;
+	overflow: hidden;
+}
+.page_body_con ul.tab_content>li{
+	display:none;
+	height:100%;
+	overflow: hidden;
+}
+.page_body_con ul.tab_content li.curr{
+	display:block;
+}
+/****** con start********/
+/***********#dialog***************/
+#dialog .title{
+	height:40px;
+	line-height: 40px;
+	padding:0 10px;
+	border-bottom:1px solid #ccc;
+}
+#dialog .con{
+	padding:10px;
+}
+#dialog .con label{
+	
+}
+#dialog .con input[type="file"]{
+	height:25px;
+	line-height: 25px;
+	border:none;
+	border-radius:5px;
+}
+#dialog .con input[type="text"]{
+	height:25px;
+	line-height: 25px;
+	border:1px solid #999;
+	border-radius:5px;
+}
+#dialog .con dl button{
+	padding:5px 10px;
+	border:none;
+	background:#00ff99;
+	color:#fff;
+	border-radius:5px;
+	float:right;
+}
+#dialog .con .name_show{
+	font-size: 12px;
+}
+#dialog .con .tips{
+	color:#c00;
+}
+#dialog .con dl{
+	margin-bottom:10px;
+}
+#dialog .imgShowBox .img_scope{
+	text-align:center;
+	line-height: 370px;
+	height:370px;
+}
+#dialog .imgShowBox span{
+	display: block;
+	margin:0 auto;
+	text-align: center;
+}
+#dialog .imgShowBox img{
+	max-height:100%;
+	max-width:100%;
+	vertical-align: middle;
+}
+#dialog .confirmBox h3{
+	text-align: center;
+	margin:10px auto;
+}
+#dialog .confirmBox  button{
+	margin:5px 10px;
+	padding:8px 15px;
+	border:none;
+	background:#0099ff;
+	color:#fff;
+	border-radius:5px;
+	float:right;
+}
+#dialog #selectimg .img_list_con{
+	width:100px;
+	height:120px;
+	float:left;
+	margin:5px;
+	border:1px solid #ccc;
+	text-align: center;
+	overflow: hidden;
+}
+#dialog #selectimg .img_scope{
+	line-height: 100px;
+	overflow: hidden;	
+}
+#dialog #selectimg .removeImg{
+	display:none;
+}
+#dialog #selectimg .img_list_con:hover{
+	border-color:#0099ff;
+}
+#dialog #selectimg .img_list_con img{
+	max-width: 100px;
+	max-height: 100px;
+	vertical-align: middle;
+}
+#dialog #selectimg .img_list_con span{
+	font-size: 10px;
+	line-height: 20px;
+}
+
+#dialog #selectlink .link_list_con{
+	border:2px solid #ccc;
+	border-radius:5px;
+	padding:5px;
+	text-align: center;
+	display: inline-block;
+	cursor:pointer;
+	min-width:100px;
+	margin:5px;
+}
+#dialog #selectlink .link_list_con:hover{
+	background:#09f;
+	border-color:#09f;
+	box-shadow: 0 0 5px #09f;
+	color:#fff;
+}
+#dialog #selectlink .link_list_con .linkname{
+	font-size: 14px;
+}
+#dialog #selectlink .link_list_con .link{
+	font-size: 12px;
+}
+/***********#dialog end***************/
+.page{
+	height:100%;
+	overflow-y:auto;
+}
+.page .options{
+	position: absolute;
+	z-index:9990;
+	width:100%;
+	padding:5px 0;
+	background: #eee;
+	box-shadow: 0 0 5px #ccc;
+}
+.page .options.fixed{
+	position: absolute;
+	width:100%;
+	top:0;
+}
+.page .options button{
+	margin:0 5px;
+	border-radius:5px;
+	border:none;
+	background: #0055ff;
+	color:#fff;
+	padding:8px;
+	cursor:pointer;
+}
+.page .layout{
+	margin:10px;
+	background:#eee;
+	text-align: center;
+	cursor:pointer;
+}
+.page .layout:hover{
+	background:#bbb;
+}
+.page .page_container{
+	margin-top:50px;
+	position: relative;
+}
+.page ul.page_container li{
+	display:block !important;
+}
+.page ul.page_container li{
+	border:1px solid #ccc;
+	border-radius:5px;
+	box-shadow: 0 0 5px #bbb;
+	margin:5px;
+	padding:5px;
+	height:30px;
+	overflow: hidden;
+	text-align: center;
+	position: relative;
+}
+.page ul.page_container li .select:after{
+	content:"";
+	display: inline-block;
+	border:8px solid transparent;
+	border-left:8px solid #666;
+	vertical-align: middle;
+	margin-left: 10px;
+	position: relative;
+}
+.page ul.page_container li.open{
+	height:auto;
+}
+.page ul.page_container li.open .select:after{
+	content:"";
+	display: inline-block;
+	border:8px solid transparent;
+	border-top:8px solid #666;
+	margin-top:8px;
+	left:-4px;
+}
+.page ul.page_container li .editors{
+	display:inline-block;
+	width:380px;
+}
+.page ul.page_container li .editor{
+	border:1px solid #ccc;
+	border-radius:5px;
+	box-shadow: 0 0 5px #bbb;
+	padding:10px;
+	position: relative;
+}
+.page ul.page_container li .editor input,.page ul.page_container li .editor textarea{
+	border:1px solid gray;
+	border-radius:3px;
+	line-height: 20px;
+	width:195px;
+}
+.page ul.page_container li label{
+	display:inline-block;
+	width:80px;
+}
+.page ul.page_container li .layout_name{
+	/* display:none;*/
+}
+.page ul.page_container li .select{
+	border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+.page ul.page_container li .addEditor{
+	line-height: 12px;
+	font-size: 10px;
+	background: #eee;
+    text-align: center;
+    cursor: pointer;
+    margin:5px 0;
+}
+.page ul.page_container li .addEditor:hover{
+	    background: #bbb;
+}
+.page ul.page_container li a.remove{
+	display:block;
+	position: absolute;
+	background:#999;
+	border-radius:50%;
+	height:20px;
+	width:20px;
+	line-height: 18px;
+	text-decoration:none;
+	right:0px;
+	top:0px;
+	font-size: 16px;
+	color:#fff;
+}
+/********layout***********/
+.layout_select{
+	width:100%;
+	position:fixed;
+	bottom:-100px;
+	left:0;
+	border-top:2px solid #ccc;
+	box-shadow: 0 0 5px #999;
+	background:#fff;
+}
+#closeSelect{
+	display: block;
+    position: absolute;
+    background: #999;
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    line-height: 22px;
+    text-align:center;
+    text-decoration: none;
+    right: 0px;
+    top: 0px;
+    font-size: 20px;
+    color: #fff;
+}
+.layout_select .editors,.layout_select .removeLayout{
+	display:none;
+}
+.layout_select li,.decorate_select li{
+	display:block;
+	width:90px;
+	height:90px;
+	margin:5px;
+	float:left;
+	line-height: 90px;
+	border:1px solid #ccc;
+	cursor:pointer;
+	text-align: center;
+}
+.layout_select li:hover{
+	border-color:#0099ff;
+	box-shadow: 0 0 8px #0099ff;
+}
+.layout_select li .select{
+	display: inline-block;
+	line-height: 20px;
+}
+.layout_select li .layout_name{
+	display: inline-block;
+	width:100%;
+	font-size: 14px;
+}
+.layout_select li .detail{
+	font-size:12px;
+	line-height: 15px;
+}
+/*******custom********/
+.edui-container{
+	margin:5px auto;
+}
+#custom .tab-title{
+	width:150px;
+	position: absolute;
+	top:0;
+	left:0;
+	height:100%;
+	border-right: 2px solid #cecece;
+    box-shadow: 0 0 20px #ddd inset;
+	float:left;
+}
+#custom .tab-title li{
+	padding: 10px;
+    width: 130px;
+    height:auto;
+    border-bottom: 2px solid #cecece;
+    cursor: pointer;
+    background: #fff;
+    font-size:12px;
+    position: relative;
+}
+#custom .tab-title li.curr{
+	border-right:2px solid #fff;
+	backfround:#def;
+}
+#custom .tab-title li .addr{
+	font-size: 10px;
+}
+#custom .tab-title li .name{
+	font-size: 14px;
+	height:20px;
+	text-align: center;
+}
+#custom .tab-title button{
+	margin: 5px auto;
+	display:block;
+    border-radius: 5px;
+    border: none;
+    width:70px;
+    background: #0055ff;
+    color: #fff;
+    padding: 8px;
+    cursor: pointer;
+}
+#custom .tab-title a{
+	font-size:10px;
+	position: absolute;
+	right:1px;
+	top:1px;
+}
+#custom .tab-contents{
+	margin-left:155px;
+	padding:10px;
+}
+#custom .tab-contents .warn{
+	border-color:red;
+}
+#custom .tab-contents>li{
+	height:auto;
+	display:none;
+}
+#custom .tab-contents>li.curr{
+	display:block;
+}

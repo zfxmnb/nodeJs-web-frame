@@ -1,0 +1,158 @@
+<link href="/umeditor/css/umeditor.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="/umeditor/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/umeditor/umeditor.min.js"></script>
+<script type="text/javascript" src="/umeditor/zh-cn/zh-cn.js"></script>
+
+<div id="custom" pageName="custom" class="page">
+    <div class="options"><button id="save1">保存当前</button><button id="refresh">刷新</button></div>
+    <div class="page_container">
+        <ul class="tab-title">
+            <button>新增页面</button>
+        </ul>
+        <ul class="tab-contents">
+            
+        </ul>
+    </div>
+</div>
+<script>
+        function tab(){
+            $("#custom .tab-title>li").each(function(index){
+                $(this).off().on("click",function(){
+                    $("#custom .tab-title>li").removeClass("curr");
+                    $(this).addClass("curr");
+                    $("#custom .tab-contents>li").removeClass("curr");
+                    $("#custom .tab-contents>li").eq(index).addClass("curr");
+                });
+                $("#custom .tab-title>li").eq(0).trigger('click');
+            });
+        }
+        function writeName(){
+            $("#custom .tab-contents>li.curr .customName").off().on("change",function(){
+                var ele=$(this)
+                ele.attr("state","true").removeClass("warn");
+                $("#custom .tab-title>li").each(function(){
+                    console.log($(this).find(".name").html());
+                    if(ele.val()==$(this).find(".name").html()){
+                        ele.attr("state","false").addClass("warn");
+                    }
+                });
+                
+                if(ele.attr("state")=="true"){
+                    $("#custom .tab-title>li.curr .custion_name").html(ele.val());
+                }
+            });
+        }
+        addpage();
+        function addpage(){
+            $("#custom .tab-title button").off().on("click",function(){
+                var id="custom"+parseInt(Math.random()*1000);
+                $(this).before('<li class="">'+
+                                    '<input type="hidden" value="'+id+'">'+
+                                    '<div class="custion_name name"></div>'+
+                                    '<div class="addr">/custom?tn=<span class="custion_id">'+id+'</span></div>'+
+                                '</li>');
+                
+                $("#custom .tab-contents").append(
+                    '<li class="">'+
+                        '<div>'+
+                            '<label for="">自定义页面name：</label><input type="text" state="false" class="customName" name="customName" value="">'+
+                            '<input type="hidden" name="customId" value="'+id+'">'+
+                       '</div>'+
+                        '<div>'+
+                            '<label for="">自定义编辑</label>'+
+                            '<script type="text/plain" id="'+id+'" style="width:800px;height:300px;">'+                    
+                            '<\/script>'+
+                        '</div>'+
+                    '</li>');
+                tab();
+                $(this).prev().trigger("click");
+                writeName();
+                UM.getEditor(id);
+                
+            });
+        }
+        $("#custom #save1").click(function(){
+            var customName=$("#custom .tab-title .curr .name").html();
+            var customId=$("#custom .tab-title .curr input[type='hidden']").val();
+            var customCon=$("#custom .tab-contents .curr .edui-body-container").html();
+            if(customName&&customId&&customCon){
+                ajax("/custom",{customname:customName,customid:customId,customcon:customCon},function(){
+                    if(this){   
+
+                    }
+                },"","json");
+            }
+        });
+        
+        $(function(){
+            $("#custom #refresh").click(function(){
+                $("#custom .tab-contents>li").each(function(){
+                    UM.getEditor($(this).find("input[type='hidden']").val()).destroy(); 
+                })
+                $("#custom .tab-contents").empty();
+                $("#custom .tab-title").empty().append("<button>新增页面</button>");
+                    pullCustom();
+            })
+
+            $(".nav_custom").click(function(){
+                if(!$("#custom .tab-title li").length){
+                    pullCustom();
+                } 
+            });
+            
+        })
+        function pullCustom(){
+            ajax("/custom",{pull:true},function(){
+                    if(this){  
+                         //console.log(this);
+                         for(var key in this.data){
+                            $("#custom .tab-title").prepend(
+                                '<li class="" link="/custom?tn='+this.data[key].customid+'">'+
+                                '<input type="hidden" value="'+this.data[key].customid+'">'+
+                                '<div class="custion_name name">'+this.data[key].customname+'</div>'+
+                                '<div class="addr" >/custom?tn=<span class="custion_name">'+this.data[key].customid+'</span></div>'+
+                                '<a href="javascript:void(0);">删除</a>'+
+                            '</li>');
+                            $("#custom .tab-contents").prepend(
+                                '<li class="">'+
+                                    '<div>'+
+                                        '<label for="">自定义页面name：</label><input type="text" state="false" class="customName" name="customName" disabled value="'+this.data[key].customname+'">'+
+                                        '<input type="hidden" name="customId" value="'+this.data[key].customid+'">'+
+                                   '</div>'+
+                                    '<div>'+
+                                        '<label for="">自定义编辑</label>'+
+                                        '<script type="text/plain" id="'+this.data[key].customid+'" style="width:800px;height:300px;">'+
+                                            this.data[key].customcon+
+                                        '<\/script>'+
+                                    '</div>'+
+                                '</li>');
+                            UM.getEditor(this.data[key].customid);
+                         }
+                         tab();
+                         writeName();
+                         addpage();
+                         removeCustom();
+                         $("#custom .tab-title").scrollbar({"pos":"left","fixWidth":false,"autohide":true});
+                    }
+                },"","json",false);
+        }
+        function removeCustom(){
+            $("#custom .tab-title a").off().on("click",function(){
+                var ele=$(this).parent("li")
+                var id=ele.find("input").val();
+                 var txt="<div class='confirmBox'><div class='title'>确定</div><h3>确定要删除自定义页面"+id+"！</h3><button class='confirm'>确认</button></div>";
+                    dialogBox("",350,130,txt,function(s){
+                        if(s){
+                            ajax("/custom",{remove:true,removeCustomid:id},function(){
+                                if(this.success){   
+                                    UM.getEditor(id).destroy();
+                                    $("#custom .tab-contents>li").eq(ele.index("#custom .tab-title li")).remove();
+                                    ele.remove();
+                                    tab();
+                                }
+                            },"","json");
+                        }
+                    });
+            })
+        }
+</script>

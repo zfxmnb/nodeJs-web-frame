@@ -1,0 +1,81 @@
+<link rel="stylesheet" href="/stylesheets/uploadImg.css">
+<div class="options"><button id="uploadImg">上传图片</button><button id="reloadImg">刷新</button></div>
+<div class="img_con">
+</div>
+<div id="imgShowBox" style="display:none;">
+    <div class="imgShowBox"></div>
+</div>
+<div id="imgdialogBox" style="display:none;">
+    <div class="title">上传图片</div>
+    <div class="con">
+    <form action="/upimg" target="form_target" id="uploadForm" method="post" enctype='multipart/form-data'>
+        <dl><label for="file">选择图片<span class="name_show"></span>
+            <input type="file" id="file" name="imgData"></label>
+        </dl>
+        <dl>图片名:
+            <input type="text" id="imgName" name="imgName">
+        </dl>
+        <dl><button id="confirm">确认</button><span class="tips"></span></dl>
+    </form>
+    </div>
+</div>
+<script>
+$("#uploadImg").click(function(){
+    dialogBox("#imgdialogBox",240,180);
+    $("#dialogCon").off().on("click","#confirm",function(){
+        if(!$(this).parents("#dialog").find("#file").val()){
+            $("#dialog .tips").html("未选择图片！");
+            return false;
+        }
+        $("#dialog .tips").html("");
+        setTimeout(function(){
+            $(".close").trigger("click");
+             ajax("/upimg",{reloadImg:true},function(){ 
+                    reloadimg(true);        
+                },"multipart/form-data","json");
+        },2000);
+    }); 
+});
+$("#reloadImg").click(function(){
+    reloadimg(true);
+})
+function reloadEvent(){
+$("#img .img_con .img_list").click(function(){
+    $("#imgShowBox .imgShowBox").html($(this).html());
+    dialogBox("#imgShowBox",650,410);
+});
+$("#img .img_list_con").each(function(){
+    var ele=$(this);
+    var reImg=$(this).find(".img_scope img").attr("src");
+    $(this).find(".removeImg").click(function(){
+        var txt="<div class='confirmBox'><div class='title'>确定</div><h3>确定要删除当前图片吗！</h3><button class='confirm'>确认</button></div>";
+        dialogBox("",350,130,txt,function(s){
+            if(s){
+                var data={removeImg:reImg};
+                ajax("/upimg",data,function(){
+                    if(this)
+                    ele.remove();
+                },"multipart/form-data","json");
+            }
+        });
+    })
+});
+}
+
+function reloadimg(as){
+    ajax("/upimg",{reloadImg:true},function(){
+        $(".img_con").html("");
+        for(var key in this.images){
+            $(".img_con").append(
+                '<div class="img_list_con">'+
+                '<a href="javascript:void(0);" class="removeImg">x</a>'+
+                '<div class="img_list">'+
+                    '<div class="img_scope"><img src="/images/'+this.images[key]+'" alt=""></div>'+
+                    '<span>'+this.images[key]+'</span>'+
+                '</div>'+
+                '</div>')
+        }
+        reloadEvent();
+    },"multipart/form-data","json",as);
+}
+</script>

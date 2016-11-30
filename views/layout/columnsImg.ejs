@@ -1,0 +1,16 @@
+<% if(data){%>
+<% var d =  data[1]%>
+<% for(var i in d){%>
+<% if(d[i].layoutId==layoutId&&d[i].layoutName=='columnsImg'){ %>
+ <div class="BannerImage" layoutId="<%= layoutId%>">
+        <% for(var k in d[i].data){ %>
+          <% for(var x in d[i].data[k]){ %>
+            <a target="_blank" href="<%= d[i].data[k][x].link%>">
+                <img src="<%= d[i].data[k][x].imgAddr%>" alt="" />
+            </a>
+          <% } %>
+        <% } %>
+</div>
+<% }%>
+<% }%>
+<% }%>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title%></title>
+    <link rel="stylesheet" href="/stylesheets/cstyle.css">
+    <script src="/javascripts/jquery.js"></script>
+    <script src="/javascripts/layout.js"></script>
+    <script src="/javascripts/scrollbar.min.js"></script>
+</head>
+<body>
+   <div class="page_header"><h1>controler</h1></div>
+   <div class="page_body">
+        <div class="page_body_nav">
+            <% include cnav.ejs%>
+        </div>
+        <div class="page_body_con">
+            <ul class="tab_content">
+                <li id="img">
+                    <% include img.ejs%>
+                </li>
+                <li class="curr">
+                    <% include ./page/page1.ejs%>
+                </li>
+                <li>
+                    <% include ./page/ccustom.ejs%>
+                </li>
+            </ul>
+            <ul class="layout_select">
+                <% include clayout.ejs%>
+            </ul>
+        </div>
+   </div>
+   <div id="dialogCon"></div>
+   <iframe id="form_target" name="form_target" frameborder="0" style="display:none;"></iframe>
+   <script src="/javascripts/cbase.js"></script>
+</body>
+</html>
